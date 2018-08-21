@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/mumba/dmport/blob/master/README.md",
   "devDependencies": {
-    "mocha": "^2.5.1"
+    "mocha": "^5.2.0"
   },
   "dependencies": {
     "commander": "^2.9.0"
