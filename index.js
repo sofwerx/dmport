@@ -112,7 +112,7 @@ if (program.export) {
 							reject(err);
 						}
 
-						config["certs"][filename] = new Buffer(data).toString('base64');
+						config["certs"][filename] = new Buffer.from(data).toString('base64');
 						resolve();
 					});
 				});
@@ -165,7 +165,7 @@ if (program.export) {
 									data = data.replace(jspr, '__MACHINE_STORE_PATH__');
 								}
 
-								config["machines"][program.export][filename] = new Buffer(data).toString('base64');
+								config["machines"][program.export][filename] = new Buffer.from(data).toString('base64');
 								resolve();
 							});
 						});
@@ -200,7 +200,7 @@ if (program.import) {
 		//We do the certs now that we have the paths setup
 		Promise.all(Object.keys(input['certs']).map(function (filename) {
 			return new Promise(function (resolve, reject) {
-				fs.writeFile(path.join(paths.cert, filename), new Buffer(input['certs'][filename], 'base64'), {
+				fs.writeFile(path.join(paths.cert, filename), new Buffer.from(input['certs'][filename], 'base64'), {
 					'encoding': 'utf8',
 					'mode': '600'
 				}, function (err) {
@@ -219,7 +219,7 @@ if (program.import) {
 		//Finally we do the machines files
 		Promise.all(Object.keys(input['machines'][machinename]).map(function (filename) {
 			return new Promise(function (resolve, reject) {
-				var cleartext = new Buffer(input['machines'][machinename][filename], 'base64');
+				var cleartext = new Buffer.from(input['machines'][machinename][filename], 'base64');
 
 				//for the config.json we want to add the paths appropriate for the computer we are importing to
 				if (filename === 'config.json') {
